@@ -3,16 +3,16 @@ import React from 'react';
 import classes from './NavigationItems.css';
 import NavigationItem from './NavigationItem/NavigationItem';
 
-const NavigationItems = props => {
+const NavigationItems = () => {
   return (
     <ul className={classes.NavigationItems}>
       <NavigationItem
         link="/"
-        active
+        exact
       >Burger builder</NavigationItem>
       <NavigationItem
-        link="/"
-      >Checkout</NavigationItem>
+        link="/orders"
+      >Orders</NavigationItem>
     </ul>
   );
 };
