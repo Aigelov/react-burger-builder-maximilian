@@ -2,39 +2,36 @@ import React from 'react';
 
 import classes from './Order.css';
 
-const Order = props => {
-  const ingredients = [];
+const order = ( props ) => {
+    const ingredients = [];
 
-  for (let ingredientName in props.ingredients) {
-    if (!props.ingredients.hasOwnProperty(ingredientName)) {
-      continue;
+    for ( let ingredientName in props.ingredients ) {
+        ingredients.push(
+            {
+                name: ingredientName,
+                amount: props.ingredients[ingredientName]
+            }
+        );
     }
 
-    ingredients.push({
-      name: ingredientName,
-      amount: props.ingredients[ingredientName]
+    const ingredientOutput = ingredients.map(ig => {
+        return <span 
+            style={{
+                textTransform: 'capitalize',
+                display: 'inline-block',
+                margin: '0 8px',
+                border: '1px solid #ccc',
+                padding: '5px'
+                }}
+            key={ig.name}>{ig.name} ({ig.amount})</span>;
     });
-  }
 
-  const ingredientOutput = ingredients.map(ingredient => {
-    return <span
-      key={ingredient.name}
-      style={{
-        textTransform: 'capitalize',
-        display: 'inline-block',
-        margin: '0 8px',
-        border: '1px solid #CCC',
-        padding: '5px'
-      }}
-    >{ingredient.name} ({ingredient.amount})</span>
-  });
+    return (
+        <div className={classes.Order}>
+            <p>Ingredients: {ingredientOutput}</p>
+            <p>Price: <strong>USD {Number.parseFloat( props.price ).toFixed( 2 )}</strong></p>
+        </div>
+    );
+};
 
-  return (
-    <div className={classes.Order}>
-      <p>Ingredients: {ingredientOutput}</p>
-      <p>Price: <b>{Number.parseFloat(props.totalPrice).toFixed(2)}$</b></p>
-    </div>
-  );
-}
-
-export default Order;
+export default order;
